@@ -1,0 +1,19 @@
+Rohan Mehta
+rohan.mehta@example.com | +91 91234 56780 | Pune, India
+
+EXPERIENCE
+
+Software Engineer II, FinServe Tech (2020 - Present)
+- Develop Django REST APIs for a payments platform handling 500k transactions/day
+- Designed PostgreSQL schemas and wrote complex analytical SQL for reconciliation
+- Containerized services with Docker and deployed on GCP Cloud Run
+- Mentored two junior engineers; introduced pytest and raised coverage to 85%
+
+Junior Developer, WebWorks Solutions (2018 - 2020)
+- Built internal tools in Python and maintained Celery task queues
+
+SKILLS
+Python, Django, PostgreSQL, Docker, GCP, Celery, Redis, pytest, Git
+
+EDUCATION
+B.Tech Information Technology, COEP Pune (2018)

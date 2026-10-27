@@ -1,0 +1,17 @@
+Sneha Iyer
+sneha.iyer@example.com | Chennai, India
+
+EXPERIENCE
+
+Data Analyst, RetailMetrics (2021 - Present)
+- Analyze sales data in SQL and Python (pandas) for 200+ retail stores
+- Built automated reporting scripts that saved the team 10 hours/week
+- Created a small Flask app to let managers query store KPIs
+- Self-learning project: fine-tuned a sentiment classifier on product reviews
+  and experimented with the OpenAI API for review summarization
+
+SKILLS
+Python, SQL, pandas, Flask (basic), Excel, Tableau, Git
+
+EDUCATION
+B.Sc. Statistics, University of Madras (2021)

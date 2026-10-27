@@ -1,0 +1,21 @@
+Priya Sharma
+priya.sharma@example.com | +91 98765 43210 | Bengaluru, India
+
+EXPERIENCE
+
+Backend Engineer, Nimbus Labs (2021 - Present)
+- Built and maintained REST APIs in FastAPI serving 2M requests/day
+- Integrated OpenAI GPT-4 for document summarization features; designed prompts
+  with JSON-schema structured outputs and retry/validation logic
+- Deployed services on AWS ECS with Docker; set up GitHub Actions CI/CD
+- Optimized PostgreSQL queries, cutting p95 latency from 800ms to 120ms
+
+Software Engineer, DataWeave (2019 - 2021)
+- Developed Python ETL pipelines processing 50GB/day of product data
+- Built internal Flask dashboards for data quality monitoring
+
+SKILLS
+Python, FastAPI, Flask, PostgreSQL, Docker, AWS, OpenAI API, Redis, Git
+
+EDUCATION
+B.E. Computer Science, RV College of Engineering (2019)

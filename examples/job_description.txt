@@ -1,0 +1,16 @@
+Senior Backend Engineer — AI Platform Team
+
+We're looking for a backend engineer to build LLM-powered products.
+
+Requirements:
+- 4+ years of backend development experience in Python
+- Experience building and deploying REST APIs (FastAPI/Flask/Django)
+- Hands-on experience with LLM APIs (OpenAI, Anthropic) or open-source models
+- Solid understanding of prompt engineering and structured output parsing
+- Experience with cloud deployment (AWS/GCP) and Docker
+- Strong SQL and data-modeling fundamentals
+
+Nice to have:
+- Vector databases (Pinecone, FAISS, pgvector)
+- CI/CD and testing culture
+- Experience in HR-tech or recruiting tools

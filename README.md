@@ -1,5 +1,11 @@
 # 🔍 LLM Resume Screener
 
+![CI](https://github.com/erAnjaliGoyal/Resume-Screener-LLM/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/erAnjaliGoyal/Resume-Screener-LLM)
+
 An LLM-based resume screening system that parses resumes (PDF/DOCX/TXT), scores them against a job description using **semantic matching** — not just keywords — and returns ranked candidates with **explainable match summaries** for recruiters.
 
 ## Why
@@ -15,6 +21,23 @@ First-pass resume screening is slow and inconsistent. Keyword filters miss stron
 - **Bias guardrails** — the scoring prompt explicitly instructs the model not to penalize career gaps or infer anything from names, schools, gender, or ethnicity
 - **Two interfaces** — a CLI for quick runs and a FastAPI service for integration
 - **Export** — results to JSON or CSV for your ATS or spreadsheet
+
+## Run it in 1 minute
+
+**Option A — GitHub Codespaces (nothing to install):** click the Codespaces badge above, wait for setup, then in the terminal:
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+make demo
+```
+
+**Option B — Docker:**
+```bash
+docker build -t resume-screener .
+docker run -p 8000:8000 -e ANTHROPIC_API_KEY=sk-ant-... resume-screener
+# open http://localhost:8000/docs
+```
+
+**Option C — local install:** see Quickstart below.
 
 ## Quickstart
 
@@ -98,9 +121,27 @@ The repo ships with a ready-made test set in [`examples/`](examples/): a backend
 ## Running tests
 
 ```bash
-pip install pytest
-pytest
+make test        # or: pip install pytest && pytest
 ```
+Tests run automatically on every push via GitHub Actions (see badge above).
+
+## How I built this: design decisions
+
+**Why an LLM instead of keyword matching or classic NLP?** Keyword filters reject candidates who phrase the same skill differently, and TF-IDF/embedding similarity alone gives a score with no explanation. An LLM can judge semantic fit *and* justify it. The trade-off is cost and latency per resume, which is acceptable for screening (an inherently batch, non-realtime task).
+
+**Structured output over free text.** The screener forces Claude to return a strict JSON schema (scores, matched/missing skills, recommendation) rather than prose. This makes results sortable, exportable to CSV/ATS, and comparable across candidates. The parser strips markdown fences and falls back to extracting the outermost JSON object, because LLMs occasionally wrap output despite instructions — defensive parsing matters.
+
+**Explainability as a feature, not an afterthought.** Every score ships with a recruiter-readable summary, missing skills, and transferable strengths. A ranking a recruiter can't interrogate is a ranking they won't trust.
+
+**Bias guardrails in the prompt.** The system prompt explicitly instructs the model not to penalize career gaps or infer anything from names, schools, gender, or ethnicity. This doesn't eliminate bias — see Responsible use — but it's a deliberate, auditable mitigation layer, and the prompt lives in version control where it can be reviewed.
+
+**Two interfaces, one engine.** The scoring logic lives in `screener.py` with zero knowledge of CLI or HTTP. `cli.py` and `api.py` are thin adapters, so adding a new surface (Slack bot, batch job) means wiring, not rewriting.
+
+**Lazy imports for graceful degradation.** The package imports the Anthropic SDK only when scoring is actually used, so parsing and tests work in environments without API dependencies installed.
+
+**Testing strategy.** Unit tests cover the deterministic layer (parsing all three formats, metadata extraction, error handling) and run free in CI. The LLM layer is validated with the bundled sample dataset — six resumes engineered to produce a known ranking order, since exact scores are non-deterministic but ordering should be stable.
+
+**What I'd do next.** Caching (identical resume+JD pairs shouldn't re-bill), async batch screening for large volumes, score-distribution audits across candidate groups, and a lightweight recruiter UI.
 
 ## Responsible use
 
